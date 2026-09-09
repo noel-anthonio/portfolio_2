@@ -2,6 +2,13 @@ import { useState } from 'react'
 
 export function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [emailCopied, setEmailCopied] = useState(false)
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText('anthonio.andrisolo@gmail.com')
+    setEmailCopied(true)
+    setTimeout(() => setEmailCopied(false), 2000)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -44,17 +51,37 @@ export function Contact() {
 
             {/* Contact details */}
             <div className="mt-10 border-t border-line-dark pt-6 flex flex-col gap-3 text-[12px]">
-              <a
-                href="mailto:anthonio.andrisolo@gmail.com"
-                className="magnetic-link text-copper font-medium"
-              >
-                anthonio.andrisolo@gmail.com
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href="mailto:anthonio.andrisolo@gmail.com"
+                  className="magnetic-link text-copper font-medium"
+                >
+                  anthonio.andrisolo@gmail.com
+                </a>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  aria-label="Copier l'adresse email"
+                  title="Copier l'adresse email"
+                  className="grid h-8 w-8 place-items-center border border-line-dark text-muted-on-dark hover:border-copper hover:text-copper transition-colors"
+                >
+                  {emailCopied ? (
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="m5 12 4 4L19 6" />
+                    </svg>
+                  ) : (
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                      <rect x="9" y="9" width="11" height="11" rx="1" />
+                      <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
+                    </svg>
+                  )}
+                </button>
+              </div>
               <span className="text-muted-on-dark">
                 +261 34 85 130 09 · +261 32 78 492 75
               </span>
               <span className="text-muted-on-dark">
-                II O 115 AC Anjanahary, Antananarivo Madagascar 101
+                Antananarivo, Madagascar 101
               </span>
             </div>
 
