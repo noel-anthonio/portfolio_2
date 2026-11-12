@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node -e \"try{require('fs').chmodSync('node_modules/.bin/tsc',0o755)}catch(e){}\"",
-    "build": "npx tsc && vite build",
+    "build": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js build",
     "preview": "vite preview"
   },
   "dependencies": {
